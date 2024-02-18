@@ -5,37 +5,27 @@ export default{
     components:{
         TodoItems
     },
+    emits:["removeTodos","addTodo"],
     data(){
         return{
-            task:'',
+            todo:'',
             date:''
         }
-    },
-    methods:{
-        addTask(){
-            const newTask = {
-                id:this.todos.length+1,
-                task: this.task,
-                date: this.date
-            }
-            this.todos.push(newTask)
-            console.log(this.todos)
-        },
-
+    }, methods:{
         removeTodos(index){
-            this.todos.splice(index, 1)
+            this.$emit('removeTodos',index)
         }
     }
 }
 </script>
 
 <template>
-    <div class="container border rounded px-5">
+    <div class="container w-100 border rounded px-5">
         <h1 class="text-center pb-5">My Todo-s</h1>
         <div class="row">
             <div class="col">
                 <input 
-                    v-model="task"
+                    v-model="todo"
                     class="form-control"
                     placeholder="Add new..."
                 />
@@ -46,9 +36,9 @@ export default{
                     v-model="date"
                     class="form-control"/>
             </div>
-            <button class="btn btn-primary mb-2" @click="addTask">Add</button>
+            <button class="btn btn-primary mb-2" @click="$emit('addTodo',this.todo,this.date)">Add</button>
 
-            <TodoItems class="py-2" v-for="todo in todos" :key="todo.id" @remove="removeTodos(index)" :todo="todo"></TodoItems>
+            <TodoItems class="py-2" v-for="(todo, index) in todos" :key="todo.id" @removeTodos="removeTodos" :todo="todo" :index="index"></TodoItems>
         </div>
 
      
