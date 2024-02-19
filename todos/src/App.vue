@@ -9,7 +9,7 @@ export default{
   },
   
   methods:{
-    removeTodos(index){
+    deleteTodo(index){
       console.log(index,"index")
             this.todos.splice(index, 1)
         },
@@ -18,10 +18,18 @@ export default{
         const newTodo = {
             id:this.todos.length+1,
             todo: todo,
-            date: date
+            date: date,
+            status:false
         }
         this.todos.push(newTodo)
         console.log(this.todos)
+    },
+    changeStatusTodo(index){
+
+      if (this.todos[index]['status']) this.todos[index]['status'] = false
+      else{
+        this.todos[index]['status'] = true
+      }
     }
   },
   components:{
@@ -32,7 +40,7 @@ export default{
 </script>
 
 <template>
-  <TodoBoard :todos="todos" @removeTodos="removeTodos" @addTodo="addTodo" />
+  <TodoBoard :todos="todos" @deleteTodo="deleteTodo" @addTodo="addTodo" @changeStatusTodo="changeStatusTodo" />
 </template>
 
 <style>

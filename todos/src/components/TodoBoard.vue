@@ -5,15 +5,18 @@ export default{
     components:{
         TodoItems
     },
-    emits:["removeTodos","addTodo"],
+    emits:["deleteTodo","addTodo","changeStatusTodo"],
     data(){
         return{
             todo:'',
             date:''
         }
     }, methods:{
-        removeTodos(index){
-            this.$emit('removeTodos',index)
+        deleteTodo(index){
+            this.$emit('deleteTodo',index)
+        },
+        changeStatusTodo(index){
+            this.$emit('changeStatusTodo',index)
         }
     }
 }
@@ -38,7 +41,7 @@ export default{
             </div>
             <button class="btn btn-primary mb-2" @click="$emit('addTodo',this.todo,this.date)">Add</button>
 
-            <TodoItems class="py-2" v-for="(todo, index) in todos" :key="todo.id" @removeTodos="removeTodos" :todo="todo" :index="index"></TodoItems>
+            <TodoItems class="py-2" v-for="(todo, index) in todos" :key="todo.id" @deleteTodo="deleteTodo" @changeStatusTodo="changeStatusTodo" :todo="todo" :index="index"></TodoItems>
         </div>
 
      
