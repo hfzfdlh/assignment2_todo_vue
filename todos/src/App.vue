@@ -14,11 +14,21 @@ export default{
             this.todos.splice(index, 1)
         },
     addTodo(todo,date){
+        let currDate = new Date()
+        const options = {
+          weekday: 'short',
+          year: 'numeric',
+          month: 'numeric',
+          day: 'numeric',
+        };
+
+        let taskDate = new Date(date)
       
         const newTodo = {
             id:this.todos.length+1,
             todo: todo,
-            date: date,
+            date: taskDate.toLocaleDateString("en-CA", options),
+            createdDate: currDate.toLocaleDateString("en-CA", options),
             status:false
         }
         this.todos.push(newTodo)

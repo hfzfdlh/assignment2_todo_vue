@@ -8,7 +8,7 @@ export default{
 }
 </script>
 <template>
-    <div class="row">
+    <div class="row ">
         <div class="col form-check">
             <input class="form-check-input me-3" value="" type="checkbox" @change="$emit('changeStatusTodo',this.index)">
             <!-- <label class="form-check-label">{{ todo.todo }}</label> -->
@@ -16,12 +16,16 @@ export default{
             <label v-else class="form-check-label text-decoration-line-through">{{ todo.todo }}</label>
         </div>
         <div class="col">
-            <p>{{ todo.date }}</p>
+            <button class="btn btn-outline-warning" disabled>{{ todo.createdDate }}</button>
         </div>
         <div class="col">
-            <button @click="$emit('deleteTodo',this.index)" class="btn"><i class="bi bi-trash"></i></button>
+            <div class="row">
+                <button @click="$emit('deleteTodo',this.index)" class="btn"><i class="bi bi-trash"></i></button>
+            </div>
+            <div class="row">
+                <p>{{ todo.date }}</p>
+            </div>
         </div>
-        
     </div>
 
 </template>
